@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./addContact.css";
+
 const AddContact = ({ submitHandler }) => {
   const [contact, setContact] = useState({ name: "", email: "" });
   const changeHandler = (e) => {
@@ -7,6 +8,10 @@ const AddContact = ({ submitHandler }) => {
   };
 
   const addContactHandler = (e) => {
+    if (!contact.name || !contact.email) {
+      alert("All Fildes Are Mandatory !");
+      return;
+    }
     e.preventDefault();
     submitHandler(contact);
     setContact({ name: "", email: "" });

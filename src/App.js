@@ -11,12 +11,15 @@ function App() {
       { id: Math.ceil(Math.random() * 100), ...contact },
     ]);
   };
-
+  const deleteContactHandler = (id) => {
+    const filteredContacts = contacts.filter((c) => c.id !== id);
+    setContacts(filteredContacts);
+  };
   return (
     <main className="App">
       <h1>Contact List</h1>
       <AddContact submitHandler={submitHandler} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} onDelete={deleteContactHandler} />
     </main>
   );
 }

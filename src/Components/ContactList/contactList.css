@@ -1,0 +1,35 @@
+.contactList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item {
+  background-color: #fff;
+  width: 40rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: start;
+}
+.item button {
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.item img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.item .userInfo {
+  display: flex;
+  align-items: center;
+}
