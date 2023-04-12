@@ -3,19 +3,23 @@ import { Link } from "react-router-dom";
 import userImage from "../../assets/images/user.png";
 import { useState } from "react";
 
-const ContactList = ({ contacts, setContacts , onDelete }) => {
-  const [searchTerm, setSearchTerm] = useState(null);
+const ContactList = ({ contacts, setContacts, allcontacts, onDelete }) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const searchHandler = (e) => {
     setSearchTerm(e.target.value);
     const search = e.target.value;
-    const filteredContacts = contacts.filter((c) => {
-      return Object.values(c)
-        .join(" ")
-        .toLocaleLowerCase()
-        .includes(search.toLocaleLowerCase());
-    });
-    setContacts(filteredContacts);
+    if (search !== "") {
+      const filteredContacts = allcontacts.filter((c) => {
+        return Object.values(c)
+          .join(" ")
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase());
+      });
+      setContacts(filteredContacts);
+    } else {
+      setContacts(allcontacts);
+    }
   };
 
   return (

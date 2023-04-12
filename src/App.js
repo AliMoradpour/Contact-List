@@ -14,6 +14,7 @@ import EditContact from "./Components/EditContact/EditContact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [allcontacts, setAllContacts] = useState(null);
 
   const editHandler = async (contact, id) => {
     try {
@@ -45,6 +46,7 @@ function App() {
     const fetchContacts = async () => {
       const { data } = await getContacts();
       setContacts(data);
+      setAllContacts(data);
     };
     try {
       fetchContacts();
@@ -74,7 +76,7 @@ function App() {
           path="/"
           exact
           render={() => (
-            <ContactList contacts={contacts} onDelete={deleteContactHandler} setContacts={setContacts}/>
+            <ContactList contacts={contacts} onDelete={deleteContactHandler} setContacts={setContacts} allcontacts={allcontacts}/>
           )}
         />
       </Switch>
