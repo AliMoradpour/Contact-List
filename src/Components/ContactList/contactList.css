@@ -52,3 +52,10 @@
 .userInfo p {
   color: #000;
 }
+.btns .edit{
+  color: #6d28d9;
+  border-color: #6d28d9;
+}
+.btns button{
+  margin-left: 7px;
+}

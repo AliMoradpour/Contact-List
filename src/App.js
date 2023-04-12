@@ -4,10 +4,26 @@ import AddContact from "./Components/AddContact/AddContact";
 import ContactList from "./Components/ContactList/ContactList";
 import { Switch, Route } from "react-router-dom";
 import ContactDetail from "./Components/ContactDetail/ContactDetail";
-import { deleteContact, getContacts, postContact } from "./services/Requests";
+import {
+  deleteContact,
+  getContacts,
+  postContact,
+  updateContact,
+} from "./services/Requests";
+import EditContact from "./Components/EditContact/EditContact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
+
+  const editHandler = async (contact, id) => {
+    try {
+      await updateContact(contact, id);
+      const { data } = await getContacts();
+      setContacts(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const submitHandler = async (contact) => {
     try {
@@ -41,6 +57,12 @@ function App() {
     <main className="App">
       <h1>Contact List</h1>
       <Switch>
+        <Route
+          path="/edit/:id"
+          render={(props) => (
+            <EditContact editHandler={editHandler} {...props} />
+          )}
+        />
         <Route path="/user/:id" component={ContactDetail} />
         <Route
           path="/add"
