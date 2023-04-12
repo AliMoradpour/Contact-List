@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./addContact.css";
 
-const AddContact = ({ submitHandler }) => {
+const AddContact = ({ submitHandler , history }) => {
   const [contact, setContact] = useState({ name: "", email: "" });
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -15,6 +15,7 @@ const AddContact = ({ submitHandler }) => {
     e.preventDefault();
     submitHandler(contact);
     setContact({ name: "", email: "" });
+    history.push("/")
   };
 
   return (

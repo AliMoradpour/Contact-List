@@ -1,20 +1,28 @@
 import "./contactList.css";
+import { Link } from "react-router-dom";
 import userImage from "../../assets/images/user.png";
 
 const ContactList = ({ contacts, onDelete }) => {
   return (
     <div className="contactList">
+      <div className="listHeader">
+        <h2>Contacts</h2>
+        <Link to="/add">
+          <button>Add Contact</button>
+        </Link>
+      </div>
       {contacts ? (
         contacts.map((contact) => {
           const { name, id, email } = contact;
           return (
             <div key={id} className="item">
               <div className="userInfo">
-                <img src={userImage} alt="user image" />
-                <div>
+                <img src={userImage} alt="user pic" />
+                <Link
+                  to={{ pathname: `user/${id}`, state: { contact: contact } }}>
                   <p>{name}</p>
                   <p>{email}</p>
-                </div>
+                </Link>
               </div>
               <button onClick={() => onDelete(id)}>Delete</button>
             </div>
