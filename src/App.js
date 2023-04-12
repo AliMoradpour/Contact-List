@@ -11,11 +11,8 @@ function App() {
 
   const submitHandler = async (contact) => {
     try {
-      setContacts([
-        ...contacts,
-        { id: Math.ceil(Math.random() * 100), ...contact },
-      ]);
-      await postContact(contact);
+      const { data } = await postContact(contact);
+      setContacts([...contacts, data]);
     } catch (error) {
       console.log(error.message);
     }
