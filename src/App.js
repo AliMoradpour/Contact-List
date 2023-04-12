@@ -4,21 +4,27 @@ import AddContact from "./Components/AddContact/AddContact";
 import ContactList from "./Components/ContactList/ContactList";
 import { Switch, Route } from "react-router-dom";
 import ContactDetail from "./Components/ContactDetail/ContactDetail";
-import { deleteContact, getContacts } from "./services/Requests";
+import { deleteContact, getContacts, postContact } from "./services/Requests";
 
 function App() {
   const [contacts, setContacts] = useState([]);
-  const submitHandler = (contact) => {
-    setContacts([
-      ...contacts,
-      { id: Math.ceil(Math.random() * 100), ...contact },
-    ]);
+
+  const submitHandler = async (contact) => {
+    try {
+      setContacts([
+        ...contacts,
+        { id: Math.ceil(Math.random() * 100), ...contact },
+      ]);
+      await postContact(contact);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const deleteContactHandler = async (id) => {
     try {
+      await deleteContact(id);
       const filteredContacts = contacts.filter((c) => c.id !== id);
       setContacts(filteredContacts);
-      await deleteContact(id);
     } catch (error) {}
   };
 
