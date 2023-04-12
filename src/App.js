@@ -74,7 +74,7 @@ function App() {
           path="/"
           exact
           render={() => (
-            <ContactList contacts={contacts} onDelete={deleteContactHandler} />
+            <ContactList contacts={contacts} onDelete={deleteContactHandler} setContacts={setContacts}/>
           )}
         />
       </Switch>

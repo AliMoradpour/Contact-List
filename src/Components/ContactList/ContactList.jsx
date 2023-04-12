@@ -1,8 +1,23 @@
 import "./contactList.css";
 import { Link } from "react-router-dom";
 import userImage from "../../assets/images/user.png";
+import { useState } from "react";
 
-const ContactList = ({ contacts, onDelete }) => {
+const ContactList = ({ contacts, setContacts , onDelete }) => {
+  const [searchTerm, setSearchTerm] = useState(null);
+
+  const searchHandler = (e) => {
+    setSearchTerm(e.target.value);
+    const search = e.target.value;
+    const filteredContacts = contacts.filter((c) => {
+      return Object.values(c)
+        .join(" ")
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase());
+    });
+    setContacts(filteredContacts);
+  };
+
   return (
     <div className="contactList">
       <div className="listHeader">
@@ -10,6 +25,9 @@ const ContactList = ({ contacts, onDelete }) => {
         <Link to="/add">
           <button>Add Contact</button>
         </Link>
+      </div>
+      <div>
+        <input type="text" value={searchTerm} onChange={searchHandler} />
       </div>
       {contacts ? (
         contacts.map((contact) => {
